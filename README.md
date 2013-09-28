@@ -32,4 +32,5 @@ One of the issues to face would be dealing with spam and users who might overloa
 Of course, there is also room for a peer-reviewed version of such a journal with the emphasis on brief communications. Having peer review would weed out a lot of the rubbish that could potentially collect.
 
 Concept document: http://figshare.com/articles/Journal_of_Brief_Ideas_concept/789014
+
 Platform suggestions: http://figshare.com/articles/Journal_of_Brief_Ideas_platform/789062
