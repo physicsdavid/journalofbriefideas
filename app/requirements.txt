@@ -1,0 +1,3 @@
+Flask<0.11
+requests_oauthlib==0.3.3
+flask-oauthlib==0.3.2
