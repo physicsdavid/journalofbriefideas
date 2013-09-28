@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, session, request, jsonify
+from flask import Flask, redirect, url_for, session, request, jsonify, render_template
 from flask_oauthlib.client import OAuth
 
 import flask_oauthlib.client
@@ -77,6 +77,11 @@ def authorized(resp):
 @figshare.tokengetter
 def get_figshare_oauth_token():
     return session.get('figshare_token')
+
+@app.route("/bootstrap")
+def bootstrap():
+    '''Bootstrap stuff for me to copy from..'''
+    return render_template('bootstrap.html')
 
 if __name__ == '__main__':
     app.run(port=80)
