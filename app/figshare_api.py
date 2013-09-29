@@ -67,7 +67,7 @@ class FigshareClient(object):
         res = json.loads(res.content)
         return res
 
-    def get_big_ideas(self):
+    def get_big_ideas(self, n=4):
         #XXX: don't have time to implement this, just returning some sample data
         #XXX: we need persistence in the app and voting / citation tracking in order
         #XXX: to determine the popularity of things posted through our site
@@ -98,7 +98,7 @@ class FigshareClient(object):
             i['id'] = '999999' #???
         import random
         random.shuffle(ideas)
-        ideas = ideas[:3]
+        ideas = ideas[:n-1]
 
         #we'll include one real result at the top for us to click on in the demo
         ideas.insert(0, {
@@ -128,3 +128,12 @@ class FigshareClient(object):
                 O(N^N)'''
         })
         return ideas
+
+    def search(self, query):
+        #XXX: re-use example data from get_big_ideas to stub out the search functionality
+        #XXX: the figshare search API looks very easy to use though:
+        #XXX: http://api.figshare.com/docs/howto.html#how-do-i-search-for-an-article-what-filters-are-available
+        #XXX: just search for the query plus the "Journal of Big Ideas" tag
+        ideas = self.get_big_ideas(n=9999)
+        ideas = [i for i in ideas if query.lower() in repr(i).lower()]
+        return dict(results=ideas)

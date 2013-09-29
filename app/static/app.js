@@ -106,7 +106,34 @@ var categories = [[89, 'Aerospace Engineering'],
  [44, 'Toxicology'],
  [134, 'Virology']];
 
+function build_idea_list_item(idea) {
+    if(idea.idea_text.length > 255) {
+        idea.idea_text = idea.idea_text.substr(0, 252) + "...";
+    }
+    var html = '<a href="/ideas/'+idea.id+'" class="list-group-item">' +
+      '<h4 class="list-group-item-heading">'+idea.title+'</h4>' +
+      '<p class="cat">posted in <u>'+idea.category+'</u></p>' +
+      '<p class="text list-group-item-text">'+idea.idea_text+'</p>' +
+    '</a>';
+    return html;
+}
+
+function search(query) {
+    $("#search-result-container a").remove();
+    $.get("/search", {"q": query}).success(function(data) {
+        data = data.results;
+        var target = $("#search-result-container");
+        console.log("=============================");
+        console.log(data);
+        for(var i=0; i<data.length; i++) {
+            console.log(data[i]);
+            target.append(build_idea_list_item(data[i]));
+        }
+    });
+}
+
 $(document).ready(function() {
+    //open idea form when "Upload an Idea" is clicked
     $("a#open_idea_form").click(function() {
         if(!LOGGED_IN) {
             alert("Please log in by using the 'Log in with Figshare' button.");
@@ -118,6 +145,7 @@ $(document).ready(function() {
         return false;
     });
 
+    //word counter
     $("textarea#idea_text").keyup(function() {
         var obj = $(this);
         text = obj.val();
@@ -129,8 +157,17 @@ $(document).ready(function() {
         $("#wordcount").html('' + wordcount);
     });
 
+    //automatically build option list from "categories"
     var select = $("#category_select");
     for(var i=0; i < categories.length; i++) {
         select.append("<option value='"+categories[i][0]+"'>"+categories[i][1]+"</option>");
     }
+
+    //search functionality
+    var searchTimeout = null;
+    $('input[name=query]').keyup(function() {
+        clearTimeout(searchTimeout);
+        var target = $(this);
+        searchTimeout = setTimeout(function() { search(target.val()); }, 500);
+    });
 });

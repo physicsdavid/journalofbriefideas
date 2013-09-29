@@ -75,6 +75,13 @@ def ideas(art_id):
     article = client.get_article(art_id)['items'][0]
     return render_template('idea.html', article=article, success=success)
 
+@app.route('/search')
+def search():
+    q = request.values['q']
+    client = FigshareClient(access_token, access_token_secret)
+    results = client.search(q)
+    return jsonify(results)
+
 @app.route('/logout')
 def logout():
     session.pop('figshare_token', None)
