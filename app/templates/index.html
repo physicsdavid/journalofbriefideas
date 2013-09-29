@@ -1,0 +1,51 @@
+{% extends "_base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <button type="button" class="btn btn-primary">Upload an Idea</button>
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+
+    <!-- Search -->
+    <div class="col-lg-6">
+        <form>
+            <div class="form-group">
+                <label for="query_field">Search</label>
+                <input type="text" class="form-control" name="query" id="query_field">
+            </div>
+        </form>
+
+        <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">List group item heading</h4>
+              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+            </a>
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">List group item heading</h4>
+              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Big Ideas -->
+    <div class="col-lg-6" id="big-ideas-container">
+        <h3>Big Ideas</h3>
+        <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">List group item heading</h4>
+              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+            </a>
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">List group item heading</h4>
+              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
