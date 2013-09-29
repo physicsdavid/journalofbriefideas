@@ -80,11 +80,6 @@ def authorized(resp):
     session['figshare_token'] = (resp['oauth_token'], '')
     session['figshare_id'] = resp['xoauth_figshare_id']
     session['figshare_name'] = get_name_from_figshare_id(session['figshare_id'])
-    #other stuff in resp:
-    #{'oauth_token_secret': u'1NjTzzzzzzzzzzzzzzzzzz',
-    # 'oauth_token': u'J4is8Yxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-    # 'xoauth_figshare_id': u'4nnnnnn'
-    #}
     return redirect(url_for('index'))
 
 @figshare.tokengetter
