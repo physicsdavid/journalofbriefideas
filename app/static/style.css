@@ -16,6 +16,11 @@ form label[for=query_field] { font-size: 29px; }
 
 #big-ideas-container h3 { margin-top: 0px; }
 
+.idea-list-container h4 { font-size: 17px; }
+.idea-list-container p.cat { font-size: 12px; margin-bottom: 4px; }
+.idea-list-container p.text { font-size: 15px; }
+.idea-list-container p.list-group-item-text { padding-top: 0; }
+
 /* ## idea page ############################################################# */
 
 #figshare-iframe-container { margin: 20px 50px; }

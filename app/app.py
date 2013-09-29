@@ -48,7 +48,9 @@ figshare = oauth.remote_app(
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    client = FigshareClient(access_token, access_token_secret)
+    big_ideas = client.get_big_ideas()
+    return render_template("index.html", big_ideas=big_ideas)
 
 @app.route('/login')
 def login():
