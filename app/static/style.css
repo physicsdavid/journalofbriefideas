@@ -3,6 +3,13 @@
 
 #login-nav { text-align: right; padding-top: 30px; }
 
+form#idea_form { display: none; }
+form#idea_form label { padding-top: 8px; }
+form#idea_form .rhs label { padding-top: 0px; }
+form#idea_form ul.chosen-choices input { padding: 0px 5px 5px 5px; font-size: 17px; height: 42px; line-height: 1.428571429; font-family: "Lora",Georgia,"Times New Roman",Times,serif; color: #333; }
+form#idea_form .chosen-container { font-size: 17px; }
+form#idea_form .chosen-container-multi .chosen-choices li.search-choice { line-height: 17px; cursor: default; }
+
 form label[for=query_field] { font-size: 29px; }
 
 #big-ideas-container h3 { margin-top: 0px; }

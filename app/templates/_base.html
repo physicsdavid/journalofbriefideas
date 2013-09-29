@@ -5,7 +5,10 @@
     <title>Journal of Brief Ideas</title>
     <link href="/static/readable-bootstrap.min.css" rel="stylesheet">
     <link href="/static/style.css" rel="stylesheet">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <link href="http://harvesthq.github.io/chosen/chosen.css" rel="stylesheet">
+    <script type="text/javascript">
+        var LOGGED_IN = {{ 'true' if 'figshare_token' in session else 'false' }};
+    </script>
   </head>
   <body>
     <div class="container">
@@ -26,5 +29,9 @@
         {% block content %}
         {% endblock %}
     </div>
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/bootstrap.min.js"></script>
+    <script src="/static/app.js"></script>
+    <script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>
   </body>
 </html>
