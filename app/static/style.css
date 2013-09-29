@@ -1,0 +1,8 @@
+.page-header { margin-top: 12px; }
+.page-header h1 a { text-decoration: none; color: #222; }
+
+#login-nav { text-align: right; padding-top: 30px; }
+
+form label[for=query_field] { font-size: 29px; }
+
+#big-ideas-container h3 { margin-top: 0px; }

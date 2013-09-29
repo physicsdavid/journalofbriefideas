@@ -11,8 +11,15 @@
     <div class="container">
         <div class="page-header">
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-8">
               <h1><a href="/">Journal of Brief Ideas</a></h1>
+            </div>
+            <div id="login-nav" class="col-lg-4">
+              {% if 'figshare_token' in session %}
+                Logged in as {{ session['figshare_name'] }} <a href="/logout" class="btn btn-warning">Log out</a>
+              {% else %}
+                <a href="/login" class="btn btn-success">Log in with Figshare</a>
+              {% endif %}
             </div>
           </div>
         </div>

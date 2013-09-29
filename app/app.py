@@ -4,6 +4,8 @@ from flask_oauthlib.client import OAuth
 import flask_oauthlib.client
 orig_make_request = flask_oauthlib.client.make_request
 
+import requests
+
 from figshare_credentials import (
     consumer_key,
     consumer_secret,
@@ -41,13 +43,22 @@ figshare = oauth.remote_app(
     authorize_url='http://api.figshare.com/v1/pbl/oauth/authorize',
 )
 
+## utils #######################################################################
+
+def get_name_from_figshare_id(figshare_id):
+    res = requests.get("http://figshare.com/authors/Unknown/%s" % figshare_id)
+    #XXX replace with lxml or beautifulsoup
+    #XXX or ask them to make an API call for this (unless i missed it)
+    name = res.content.split('id="author_name">')[1].split("<", 1)[0]
+    return name
+
 ## app #########################################################################
 
 @app.route('/')
 def index():
-    if 'figshare_token' in session:
-        return jsonify(figshare.get('/my_data/articles'))
-    return redirect(url_for('login'))
+    #if 'figshare_token' in session:
+    #    return jsonify(figshare.get('/my_data/articles'))
+    return render_template("index.html")
 
 @app.route('/login')
 def login():
@@ -67,12 +78,14 @@ def authorized(resp):
             request.args['error_description']
         )
     session['figshare_token'] = (resp['oauth_token'], '')
+    session['figshare_id'] = resp['xoauth_figshare_id']
+    session['figshare_name'] = get_name_from_figshare_id(session['figshare_id'])
     #other stuff in resp:
     #{'oauth_token_secret': u'1NjTzzzzzzzzzzzzzzzzzz',
     # 'oauth_token': u'J4is8Yxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
     # 'xoauth_figshare_id': u'4nnnnnn'
     #}
-    return jsonify({'ok': 1})
+    return redirect(url_for('index'))
 
 @figshare.tokengetter
 def get_figshare_oauth_token():
