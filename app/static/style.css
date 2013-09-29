@@ -3,6 +3,8 @@
 
 #login-nav { text-align: right; padding-top: 30px; }
 
+/* ## index page ############################################################ */
+
 form#idea_form { display: none; }
 form#idea_form label { padding-top: 8px; }
 form#idea_form .rhs label { padding-top: 0px; }
@@ -13,3 +15,7 @@ form#idea_form .chosen-container-multi .chosen-choices li.search-choice { line-h
 form label[for=query_field] { font-size: 29px; }
 
 #big-ideas-container h3 { margin-top: 0px; }
+
+/* ## idea page ############################################################# */
+
+#figshare-iframe-container { margin: 20px 50px; }

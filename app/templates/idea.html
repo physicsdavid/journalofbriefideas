@@ -13,18 +13,32 @@
 {% endif %}
 
 <div class="row">
-    <div class="col-lg-12">
-        <p>Title: {{article['title']}}</p>
-        <p>Posted by: <a href="http://figshare.com/authors/{{article['owner']['full_name'].replace(' ', '+')}}/{{article['owner']['id']}}">{{article['owner']['full_name']}}</a></p>
-        <p>Published date: {{article['published_date']}}</p>
-        <p>Categories:
-        {% for cat in article['categories'] %}
-            {{cat['name']}}{% if not loop.last %},{% endif %}
-        {% endfor %}
-        </p>
-        <p>Idea: {{article['description_nohtml']}}</p>
-        <p><a href="{{article['figshare_url']}}">View this idea on figshare</a>.</p>
+    <div class="col-lg-2 idea_label">Title:</div><div class="col-lg-6">{{article['title']}}</div>
+</div>
+<div class="row">
+    <div class="col-lg-2 idea_label">Posted by:</div><div class="col-lg-6"><a href="http://figshare.com/authors/{{article['owner']['full_name'].replace(' ', '+')}}/{{article['owner']['id']}}">{{article['owner']['full_name']}}</a></div>
+</div>
+<div class="row">
+    <div class="col-lg-2 idea_label">Published date:</div><div class="col-lg-6">{{article['published_date']}}</div>
+</div>
+<div class="row">
+    <div class="col-lg-2 idea_label">Categories:</div><div class="col-lg-6">
+    {% for cat in article['categories'] %}
+        {{cat['name']}}{% if not loop.last %},{% endif %}
+    {% endfor %}
     </div>
+</div>
+<div id="figshare-iframe-container" class="row">
+    <iframe src="http://wl.figshare.com/articles/810455/embed?show_title=1" width="568" height="427" frameborder="0"></iframe>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-lg-12">
+        <p>To cite this idea, click the "Share" button, then "Cite."</p>
+        <p><a href="{{article['figshare_url']}}">View full details</a> for this idea on figshare.</p>
+    <div class="col-lg-12">
 </div>
 
 {% endblock %}
