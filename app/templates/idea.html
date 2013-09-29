@@ -1,0 +1,30 @@
+{% extends "_base.html" %}
+{% block content %}
+
+{% if success %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-dismissable alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          Your idea has been posted!
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <p>Title: {{article['title']}}</p>
+        <p>Posted by: <a href="http://figshare.com/authors/{{article['owner']['full_name'].replace(' ', '+')}}/{{article['owner']['id']}}">{{article['owner']['full_name']}}</a></p>
+        <p>Published date: {{article['published_date']}}</p>
+        <p>Categories:
+        {% for cat in article['categories'] %}
+            {{cat['name']}}{% if not loop.last %},{% endif %}
+        {% endfor %}
+        </p>
+        <p>Idea: {{article['description_nohtml']}}</p>
+        <p><a href="{{article['figshare_url']}}">View this idea on figshare</a>.</p>
+    </div>
+</div>
+
+{% endblock %}

@@ -12,6 +12,7 @@ from figshare_credentials import (
     access_token,
     access_token_secret,
 )
+from figshare_api import FigshareClient, get_name_from_figshare_id
 
 ACCESS_TOKEN_URL = 'http://api.figshare.com/v1/pbl/oauth/access_token'
 
@@ -36,21 +37,12 @@ figshare = oauth.remote_app(
     consumer_key=consumer_key,
     consumer_secret=consumer_secret,
     request_token_params={'scope': ''},
-    base_url='https://api.figshare.com/v1/',
+    base_url='http://api.figshare.com/v1/',
     request_token_url='http://api.figshare.com/v1/pbl/oauth/request_token',
     access_token_method='POST', #XXX does not work with oauth1? see monkeypatch above
     access_token_url=ACCESS_TOKEN_URL,
     authorize_url='http://api.figshare.com/v1/pbl/oauth/authorize',
 )
-
-## utils #######################################################################
-
-def get_name_from_figshare_id(figshare_id):
-    res = requests.get("http://figshare.com/authors/Unknown/%s" % figshare_id)
-    #XXX replace with lxml or beautifulsoup
-    #XXX or ask them to make an API call for this (unless i missed it)
-    name = res.content.split('id="author_name">')[1].split("<", 1)[0]
-    return name
 
 ## app #########################################################################
 
@@ -64,8 +56,22 @@ def login():
 
 @app.route('/post', methods=['POST'])
 def post():
-    #XXX: use the figshare.py test code to upload to the user's figshare acct
-    raise 'hihi'
+    client = FigshareClient(session['figshare_token'][0], session['figshare_token_secret'])
+    art_id = client.post_article(request.form['title'], request.form['idea_text'])
+    client.attach_idea_as_file(art_id, request.form['idea_text'])
+    for cat in request.form['categories'].split(','):
+        client.add_category(art_id, cat)
+    client.add_tag(art_id)
+    client.make_public(art_id)
+    session['success'] = True
+    return redirect(url_for('ideas', art_id=art_id))
+
+@app.route('/ideas/<art_id>')
+def ideas(art_id):
+    success = session.pop('success', False)
+    client = FigshareClient(session['figshare_token'][0], session['figshare_token_secret'])
+    article = client.get_article(art_id)['items'][0]
+    return render_template('idea.html', article=article, success=success)
 
 @app.route('/logout')
 def logout():
@@ -81,6 +87,7 @@ def authorized(resp):
             request.args['error_description']
         )
     session['figshare_token'] = (resp['oauth_token'], '')
+    session['figshare_token_secret'] = resp['oauth_token_secret']
     session['figshare_id'] = resp['xoauth_figshare_id']
     session['figshare_name'] = get_name_from_figshare_id(session['figshare_id'])
     return redirect(url_for('index'))
