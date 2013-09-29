@@ -69,7 +69,7 @@ def post():
 @app.route('/ideas/<art_id>')
 def ideas(art_id):
     success = session.pop('success', False)
-    client = FigshareClient(session['figshare_token'][0], session['figshare_token_secret'])
+    client = FigshareClient(access_token, access_token_secret)
     article = client.get_article(art_id)['items'][0]
     return render_template('idea.html', article=article, success=success)
 
