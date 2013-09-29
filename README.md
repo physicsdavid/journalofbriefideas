@@ -35,3 +35,11 @@ The first couple of entries in the Journal of Brief Ideas are as follows:
 Concept document: http://figshare.com/articles/Journal_of_Brief_Ideas_concept/789014
 
 Platform suggestions: http://figshare.com/articles/Journal_of_Brief_Ideas_platform/789062
+
+## Screenshots
+
+Screenshots of the site created at Science Hack Day 2013 in San Francisco:
+
+https://github.com/physicsdavid/journalofbriefideas/wiki
+
+For more details see app/README.md
