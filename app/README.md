@@ -17,4 +17,4 @@ sudo ../../bin/python app.py
 
 I used lvh.me to get oauth to work, callback URL = `http://lvh.me/login/authorized`
 
-The figshare folks asked us not to public test articles, so please keep that in mind while developing/testing.
+The figshare folks asked us not to publish test articles, so please keep that in mind while developing/testing.
