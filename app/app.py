@@ -56,13 +56,16 @@ def get_name_from_figshare_id(figshare_id):
 
 @app.route('/')
 def index():
-    #if 'figshare_token' in session:
-    #    return jsonify(figshare.get('/my_data/articles'))
     return render_template("index.html")
 
 @app.route('/login')
 def login():
     return figshare.authorize(callback=url_for('authorized', _external=True))
+
+@app.route('/post', methods=['POST'])
+def post():
+    #XXX: use the figshare.py test code to upload to the user's figshare acct
+    raise 'hihi'
 
 @app.route('/logout')
 def logout():
