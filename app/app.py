@@ -52,6 +52,10 @@ def index():
     big_ideas = client.get_big_ideas()
     return render_template("index.html", big_ideas=big_ideas)
 
+@app.route('/about')
+def about():
+    return render_template("about.html")
+
 @app.route('/login')
 def login():
     return figshare.authorize(callback=url_for('authorized', _external=True))
