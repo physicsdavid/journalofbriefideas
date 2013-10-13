@@ -1,7 +1,12 @@
-.page-header { margin-top: 12px; }
+.page-header { margin-top: 12px; padding-bottom: 0px; }
 .page-header h1 a { text-decoration: none; color: #222; }
 
 #login-nav { text-align: right; padding-top: 30px; }
+
+.navbar .navbar-brand { color: #333; font-weight: bold; font-size: 24px; padding-left: 2px; }
+
+.navbar.navbar-default { border: 0; box-shadow: none; -webkit-box-shadow: none; margin-bottom: 2px; }
+.navbar ul li a.btn { color: white; padding: 8px 12px; margin: 10px 0px; }
 
 /* ## index page ############################################################ */
 
